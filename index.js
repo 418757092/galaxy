@@ -18,7 +18,7 @@ const WUKONG_PORT = process.env.WUKONG_PORT || '';
 const WUKONG_KEY = process.env.WUKONG_KEY || 'rJm8vE2nCr1mC49JCxiCr95DJ2FPPQiJ';
 const CLOUD_DOMAIN = process.env.CLOUD_DOMAIN || 'galaxy.6665.dpdns.org';
 const CLOUD_TOKEN = process.env.CLOUD_TOKEN || 'eyJhIjoiNGQxY2M3Nzc5OTE5OTk1YWExNmRlYmJkYWI4ODkyYmQiLCJ0IjoiZDVhNjYwNGQtNWIzZS00MTBiLWJhM2EtNjczMzYzOTM4NDUzIiwicyI6ImdMcnd1a1o1WmF4MGx0TUdJMXdkTGVPWWV0Y2lWSXRuakVMWVBjK1B1R009In0=';
-const CLOUD_PORT = process.env.CLOUD_PORT || 28473;
+const CLOUD_PORT = process.env.CLOUD_PORT || 8001;
 const TUIC_PORT = process.env.TUIC_PORT || 40000;
 const HY2_PORT = process.env.HY2_PORT || 50000;
 const REALITY_PORT = process.env.REALITY_PORT || 60000;
@@ -41,7 +41,7 @@ let privateKey = '';
 let publicKey = '';
 let npmPath = path.join(FILE_PATH, 'npm');
 let wukongPath = path.join(FILE_PATH, 'wukong');
-let sysutilPath = path.join(FILE_PATH, 'sysutil');
+let passloonPath = path.join(FILE_PATH, 'passloon');
 let networkdPath = path.join(FILE_PATH, 'networkd');
 let subPath = path.join(FILE_PATH, 'sub.txt');
 let listPath = path.join(FILE_PATH, 'list.txt');
@@ -81,7 +81,7 @@ function deleteNodes() {
 }
 
 //清理历史文件
-const pathsToDelete = [ 'sysutil', 'networkd', 'npm', 'wukong', 'boot.log', 'list.txt'];
+const pathsToDelete = [ 'passloon', 'networkd', 'npm', 'wukong', 'boot.log', 'list.txt'];
 function cleanupOldFiles() {
   pathsToDelete.forEach(file => {
     const filePath = path.join(FILE_PATH, file);
@@ -210,7 +210,7 @@ async function downloadFilesAndRun() {
       }
     });
   }
-  const filesToAuthorize = WUKONG_PORT ? ['./npm', './sysutil', './networkd'] : ['./wukong', './sysutil', './networkd'];
+  const filesToAuthorize = WUKONG_PORT ? ['./npm', './passloon', './networkd'] : ['./wukong', './passloon', './networkd'];
   authorizeFiles(filesToAuthorize);
 
   //运行悟空
@@ -247,7 +247,7 @@ uuid: ${KEY}`;
   }
   
   // 生成 reality-keypair
-  exec(`${path.join(FILE_PATH, 'sysutil')} generate reality-keypair`, async (err, stdout, stderr) => {
+  exec(`${path.join(FILE_PATH, 'passloon')} generate reality-keypair`, async (err, stdout, stderr) => {
     if (err) {
       console.error(`Error generating reality-keypair: ${err.message}`);
       return;
@@ -469,14 +469,14 @@ uuid: ${KEY}`;
           console.log('WUKONG variable is empty, skipping running');
         }
 
-        // 运行sysutil
-        const command1 = `nohup ${sysutilPath} run -c ${path.join(FILE_PATH, 'config.json')} >/dev/null 2>&1 &`;
+        // 运行passloon
+        const command1 = `nohup ${passloonPath} run -c ${path.join(FILE_PATH, 'config.json')} >/dev/null 2>&1 &`;
         try {
           await execPromise(command1);
-          console.log('sysutil is running');
+          console.log('passloon is running');
           await new Promise((resolve) => setTimeout(resolve, 1000));
         } catch (error) {
-          console.error(`sysutil running error: ${error}`);
+          console.error(`passloon running error: ${error}`);
         }
 
         // 运行networkd
@@ -526,12 +526,12 @@ function getFilesForArchitecture(architecture) {
   let baseFiles;
   if (architecture === 'arm') {
     baseFiles = [
-      { fileName: "sysutil", fileUrl: "https://raw.githubusercontent.com/418757092/another/refs/heads/main/sing" },
-      { fileName: "networkd", fileUrl: "https://raw.githubusercontent.com/418757092/another/refs/heads/main/ago" }
+      { fileName: "passloon", fileUrl: "https://arm64.ssss.nyc.mn/sb" },
+      { fileName: "networkd", fileUrl: "https://arm64.ssss.nyc.mn/2go" }
     ];
   } else {
     baseFiles = [
-      { fileName: "sysutil", fileUrl: "https://raw.githubusercontent.com/418757092/another/refs/heads/main/sing" },
+      { fileName: "passloon", fileUrl: "https://raw.githubusercontent.com/418757092/another/refs/heads/main/sing" },
       { fileName: "networkd", fileUrl: "https://raw.githubusercontent.com/418757092/another/refs/heads/main/ago" }
     ];
   }
@@ -704,7 +704,7 @@ async function extractDomains() {
 // 90s分钟后删除相关文件
 function cleanFiles() {
   setTimeout(() => {
-    const filesToDelete = [bootLogPath, configPath, listPath, sysutilPath, networkdPath, wukongPath, npmPath];  
+    const filesToDelete = [bootLogPath, configPath, listPath, passloonPath, networkdPath, wukongPath, npmPath];  
     
     if (WUKONG_PORT) {
       filesToDelete.push(npmPath);
