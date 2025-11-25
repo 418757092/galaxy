@@ -1,18 +1,18 @@
 {
-  "name": "mgufo",
-  "version": "3.5.1",
-  "description": "Thsi is a node project",
+  "name": "web-access",
+  "version": "2.3.0",
+  "description": "future life",
   "main": "index.js",
-  "author": "mgufo",
-  "repository": "",
+  "author": "manager",
+  "repository": "https://github.com/NetworkGuardian/web-access",
   "license": "MIT",
   "private": false,
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "axios": "latest",
-    "express": "^4.18.2"
+    "ws": "^8.14.2",
+    "axios": "^1.6.2"
   },
   "engines": {
     "node": ">=14"
