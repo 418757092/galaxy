@@ -18,7 +18,7 @@ const WUKONG_PORT = process.env.WUKONG_PORT || '';
 const WUKONG_KEY = process.env.WUKONG_KEY || 'rJm8vE2nCr1mC49JCxiCr95DJ2FPPQiJ';
 const CLOUD_DOMAIN = process.env.CLOUD_DOMAIN || 'galaxy.6665.dpdns.org';
 const CLOUD_TOKEN = process.env.CLOUD_TOKEN || 'eyJhIjoiNGQxY2M3Nzc5OTE5OTk1YWExNmRlYmJkYWI4ODkyYmQiLCJ0IjoiZDVhNjYwNGQtNWIzZS00MTBiLWJhM2EtNjczMzYzOTM4NDUzIiwicyI6ImdMcnd1a1o1WmF4MGx0TUdJMXdkTGVPWWV0Y2lWSXRuakVMWVBjK1B1R009In0=';
-const CLOUD_PORT = process.env.CLOUD_PORT || 8001;
+const CLOUD_PORT = process.env.CLOUD_PORT || 28473;
 const TUIC_PORT = process.env.TUIC_PORT || 40000;
 const HY2_PORT = process.env.HY2_PORT || 50000;
 const REALITY_PORT = process.env.REALITY_PORT || 60000;
