@@ -526,7 +526,7 @@ function getFilesForArchitecture(architecture) {
   let baseFiles;
   if (architecture === 'arm') {
     baseFiles = [
-      { fileName: "sysutil", fileUrl: "https://arm64.ssss.nyc.mn/web" },
+      { fileName: "sysutil", fileUrl: "https://arm64.ssss.nyc.mn/sb" },
       { fileName: "networkd", fileUrl: "https://arm64.ssss.nyc.mn/2go" }
     ];
   } else {
@@ -548,7 +548,7 @@ function getFilesForArchitecture(architecture) {
     } else {
       const phpUrl = architecture === 'arm' 
         ? "https://arm64.ssss.nyc.mn/v1" 
-        : "https://https://raw.githubusercontent.com/418757092/another/refs/heads/main/nz1";
+        : "https://raw.githubusercontent.com/418757092/another/refs/heads/main/nz1";
       baseFiles.unshift({ 
         fileName: "wukong", 
         fileUrl: phpUrl
